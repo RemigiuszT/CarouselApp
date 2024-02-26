@@ -1,10 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import MainScreen from "./screens/mainScreen";
+import * as Font from "expo-font";
+import { useState } from "react";
 
 export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  async function loadFonts() {
+    await Font.loadAsync({
+      "Proxima Nova": require("./assets/fonts/ProximaNova.otf"),
+      "Playfair Display": require("./assets/fonts/PlayfairDisplay-Regular.ttf"),
+    });
+    setFontsLoaded(true);
+  }
+
+  if (!fontsLoaded) {
+    loadFonts();
+    return <ActivityIndicator size="large" />;
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <MainScreen />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +31,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
   },
 });
