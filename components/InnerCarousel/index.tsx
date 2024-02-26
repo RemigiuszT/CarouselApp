@@ -52,7 +52,7 @@ export const InnerCarousel: React.FC<InnerCarouselProps> = ({
               {renderTags(offer.tags)}
             </Text>
             <Text style={styles.offerTitle}>{offer.title}</Text>
-            <Text style={styles.offerSubtitle}>Izolowany trening MDM</Text>
+            <Text style={styles.offerSubtitle}>{offer.subtitle}</Text>
           </View>
         </TouchableOpacity>
       ))}
